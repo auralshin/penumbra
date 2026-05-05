@@ -4,7 +4,7 @@ Add production screenshots here before publishing the repository or marketplace 
 
 Recommended files:
 
-- `workbench.png` - full VS Code window with sidebar, editor, panel/chat, and status bar visible.
+- `ss.png` - full VS Code window with sidebar, editor, panel/chat, and status bar visible.
 - `syntax.png` - editor-focused screenshot showing multiple languages or the fixture workspace.
 - `theme-only.png` - optional screenshot with only the color theme enabled.
 - `custom-ui.png` - optional screenshot with Custom UI Style enabled.

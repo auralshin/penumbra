@@ -4,10 +4,13 @@ Penumbra is a pitch-black VS Code color theme with optional Custom UI Style chro
 
 ## Screenshots
 
-Production screenshots should live in `assets/screenshots/`:
+![Penumbra workbench screenshot](assets/screenshots/ss.png)
 
-- `workbench.png` - full workbench with sidebar, editor, panel/chat, and status bar
+More screenshots can live in `assets/screenshots/`:
+
 - `syntax.png` - editor-focused syntax sample
+- `theme-only.png` - optional screenshot with only the color theme enabled
+- `custom-ui.png` - optional screenshot with Custom UI Style enabled
 
 ## Features
 
