@@ -1,0 +1,19 @@
+{
+  "name": "penumbra-fixture",
+  "version": "0.1.0",
+  "description": "Sample JSON for theme testing",
+  "active": true,
+  "count": 42,
+  "ratio": 0.618,
+  "tags": ["dark", "rounded", "islands"],
+  "config": {
+    "radius": 16,
+    "gap": 8,
+    "tint": null,
+    "modes": ["pitch", "dim"]
+  },
+  "users": [
+    { "id": 1, "name": "Ada",   "active": true  },
+    { "id": 2, "name": "Grace", "active": false }
+  ]
+}

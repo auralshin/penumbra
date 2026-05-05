@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Penumbra design tokens",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "name",
+    "displayName",
+    "description",
+    "type",
+    "palette",
+    "syntax",
+    "italics",
+    "languageTints",
+    "radii",
+    "gaps"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "type": "string", "minLength": 1 },
+    "displayName": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "type": { "enum": ["dark", "light"] },
+    "palette": { "$ref": "#/$defs/palette" },
+    "syntax": { "$ref": "#/$defs/syntax" },
+    "italics": {
+      "type": "array",
+      "items": {
+        "enum": ["comment", "keyword", "decorator", "constant"]
+      },
+      "uniqueItems": true
+    },
+    "languageTints": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9_-]+$" },
+      "additionalProperties": { "$ref": "#/$defs/hex" },
+      "required": ["_default"]
+    },
+    "radii": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["panel", "widget", "input", "item", "pill"],
+      "properties": {
+        "panel": { "$ref": "#/$defs/nonNegativeInteger" },
+        "widget": { "$ref": "#/$defs/nonNegativeInteger" },
+        "input": { "$ref": "#/$defs/nonNegativeInteger" },
+        "item": { "$ref": "#/$defs/nonNegativeInteger" },
+        "pill": { "$ref": "#/$defs/nonNegativeInteger" }
+      }
+    },
+    "gaps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outer", "top"],
+      "properties": {
+        "outer": { "$ref": "#/$defs/nonNegativeInteger" },
+        "top": { "$ref": "#/$defs/nonNegativeInteger" }
+      }
+    }
+  },
+  "$defs": {
+    "hex": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "nonNegativeInteger": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "palette": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canvas",
+        "surface0",
+        "surface1",
+        "surface2",
+        "surface3",
+        "line",
+        "text",
+        "textMuted",
+        "textFaint",
+        "accent",
+        "success",
+        "warn",
+        "error",
+        "info"
+      ],
+      "properties": {
+        "canvas": { "$ref": "#/$defs/hex" },
+        "surface0": { "$ref": "#/$defs/hex" },
+        "surface1": { "$ref": "#/$defs/hex" },
+        "surface2": { "$ref": "#/$defs/hex" },
+        "surface3": { "$ref": "#/$defs/hex" },
+        "line": { "$ref": "#/$defs/hex" },
+        "text": { "$ref": "#/$defs/hex" },
+        "textMuted": { "$ref": "#/$defs/hex" },
+        "textFaint": { "$ref": "#/$defs/hex" },
+        "accent": { "$ref": "#/$defs/hex" },
+        "success": { "$ref": "#/$defs/hex" },
+        "warn": { "$ref": "#/$defs/hex" },
+        "error": { "$ref": "#/$defs/hex" },
+        "info": { "$ref": "#/$defs/hex" }
+      }
+    },
+    "syntax": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "comment",
+        "keyword",
+        "constant",
+        "string",
+        "stringEsc",
+        "function",
+        "type",
+        "property",
+        "variable",
+        "parameter",
+        "operator",
+        "punctuation",
+        "tag",
+        "attribute",
+        "regex",
+        "decorator",
+        "markupHead",
+        "markupLink",
+        "markupCode",
+        "diffAdd",
+        "diffRemove"
+      ],
+      "properties": {
+        "comment": { "$ref": "#/$defs/hex" },
+        "keyword": { "$ref": "#/$defs/hex" },
+        "constant": { "$ref": "#/$defs/hex" },
+        "string": { "$ref": "#/$defs/hex" },
+        "stringEsc": { "$ref": "#/$defs/hex" },
+        "function": { "$ref": "#/$defs/hex" },
+        "type": { "$ref": "#/$defs/hex" },
+        "property": { "$ref": "#/$defs/hex" },
+        "variable": { "$ref": "#/$defs/hex" },
+        "parameter": { "$ref": "#/$defs/hex" },
+        "operator": { "$ref": "#/$defs/hex" },
+        "punctuation": { "$ref": "#/$defs/hex" },
+        "tag": { "$ref": "#/$defs/hex" },
+        "attribute": { "$ref": "#/$defs/hex" },
+        "regex": { "$ref": "#/$defs/hex" },
+        "decorator": { "$ref": "#/$defs/hex" },
+        "markupHead": { "$ref": "#/$defs/hex" },
+        "markupLink": { "$ref": "#/$defs/hex" },
+        "markupCode": { "$ref": "#/$defs/hex" },
+        "diffAdd": { "$ref": "#/$defs/hex" },
+        "diffRemove": { "$ref": "#/$defs/hex" }
+      }
+    }
+  }
+}

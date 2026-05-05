@@ -1,0 +1,60 @@
+{
+  "name": "penumbra",
+  "displayName": "Penumbra",
+  "description": "Pitch-black VS Code theme with rounded floating islands and per-language accent tints.",
+  "version": "0.1.0",
+  "publisher": "auralshin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/auralshin/penumbra.git"
+  },
+  "bugs": {
+    "url": "https://github.com/auralshin/penumbra/issues"
+  },
+  "homepage": "https://github.com/auralshin/penumbra#readme",
+  "galleryBanner": {
+    "color": "#000000",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "dark",
+    "pitch black",
+    "rounded",
+    "islands",
+    "minimal",
+    "oled"
+  ],
+  "files": [
+    "themes/penumbra-color-theme.json",
+    "css/_tokens.generated.css",
+    "css/penumbra.css",
+    "css/penumbra.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Penumbra",
+        "uiTheme": "vs-dark",
+        "path": "./themes/penumbra-color-theme.json"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check",
+    "watch": "node scripts/build.mjs --watch",
+    "package": "npm run check && vsce package --no-dependencies"
+  },
+  "extensionKind": [
+    "ui"
+  ]
+}

@@ -1,0 +1,386 @@
+/* ============================================================================
+   Penumbra — Custom UI Style sheet
+   Pitch-black canvas, rounded floating islands, per-language accent tint.
+   Pairs with the Penumbra color theme. Tokens are loaded by Custom UI Style
+   from css/_tokens.generated.css (must come before this file in the
+   external.imports list — see install.sh and scripts/dev.sh).
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. Canvas — the void between islands
+   The workbench background is what shows *through* the gaps. Setting it on
+   .monaco-workbench (the actual element behind the parts) is what makes
+   margin on the parts visually create a gap.
+   ------------------------------------------------------------------------- */
+.monaco-workbench {
+  background-color: var(--void-canvas) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   2. Workbench parts — the islands
+   VS Code's grid view sets each part's height inline. Plain margin alone
+   doesn't shrink the part; we also need max-height that subtracts the gap
+   so the part fits inside the smaller visible region.
+   ------------------------------------------------------------------------- */
+
+/* Common island treatment — borders create the gap (canvas-coloured, so
+   they blend into the void), box-sizing keeps VS Code's grid math intact,
+   and an inset hairline + top highlight gives a 3D "glassy plate" edge
+   that's visible even on pitch black where drop-shadow can't help.
+   Outer radius is panel-radius + gap so the *visible* inner curve is
+   exactly --void-r-panel. */
+/* Keep the island itself rounded, but don't clip VS Code's fixed-height
+   children. The inset shadow supplies the visible hairline without changing
+   the part's box model or hiding bottom controls. */
+.monaco-workbench .part.sidebar,
+.monaco-workbench .part.auxiliarybar,
+.monaco-workbench .part.editor {
+  background-color: var(--void-surface-0) !important;
+  border-radius: var(--void-r-panel) !important;
+  height: calc(100% - var(--void-gap-outer)) !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  box-shadow:
+    inset 0  0 0 1px rgba(255, 255, 255, 0.10),
+    inset 0  1px 0 rgba(255, 255, 255, 0.14),
+    0 4px 14px rgba(0, 0, 0, 0.70) !important;
+}
+
+.monaco-workbench .part.sidebar      { margin-left:  var(--void-gap-outer) !important; }
+.monaco-workbench .part.auxiliarybar { margin-right: var(--void-gap-outer) !important; }
+.monaco-workbench .part.editor       {
+  margin-left:  var(--void-gap-outer) !important;
+  margin-right: var(--void-gap-outer) !important;
+}
+
+/* Activity bar — canvas-coloured, fixed width, lives on the void itself.
+   `padding-bottom` keeps the lower icons (account, manage) out of the
+   status bar's territory; padding doesn't break VS Code's grid math the
+   way `margin-bottom` would. */
+.monaco-workbench .part.activitybar {
+  background-color: var(--void-canvas) !important;
+  width: 54px !important;
+  padding-bottom: 36px !important;
+  box-sizing: border-box !important;
+}
+
+/* Panel (bottom terminal / problems / output) — margin + height: calc */
+.monaco-workbench .part.panel.bottom {
+  background-color: var(--void-surface-0) !important;
+  border-radius: var(--void-r-panel) !important;
+  margin: 0 var(--void-gap-outer) var(--void-gap-outer) var(--void-gap-outer) !important;
+  height: calc(100% - var(--void-gap-outer)) !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  box-shadow:
+    inset 0  0 0 1px rgba(255, 255, 255, 0.10),
+    inset 0  1px 0 rgba(255, 255, 255, 0.14),
+    0 4px 14px rgba(0, 0, 0, 0.70) !important;
+}
+
+/* Pad the panel header AND any action containers so right-side icons
+   (split, kill, maximise) sit inside the rounded corner's safe zone.
+   The previous fix only padded `.composite.title` but the actions live in
+   a nested .actions-container that was still flush against the curve. */
+.monaco-workbench .part.panel.bottom > .composite.title,
+.monaco-workbench .part.panel.bottom > .title {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+.monaco-workbench .part.panel.bottom .actions-container,
+.monaco-workbench .part.panel.bottom .panel-switcher-container {
+  margin-right: 8px !important;
+}
+
+/* Drop legacy inner borders so the radius isn't double-outlined. */
+.monaco-workbench .part > .title,
+.monaco-workbench .part > .content,
+.monaco-workbench .part .composite.title {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Keep section headers inside the rounded sidebar mask. VS Code lays these
+   rows out wider than the visible island after the outer gap is applied, so
+   the row itself must be narrowed before the title/actions are inset. */
+.monaco-workbench .part.sidebar .composite.title,
+.monaco-workbench .part.sidebar .pane-header,
+.monaco-workbench .part.auxiliarybar .composite.title,
+.monaco-workbench .part.auxiliarybar .pane-header {
+  width: calc(100% - 12px) !important;
+  max-width: calc(100% - 12px) !important;
+  margin-left: 6px !important;
+  margin-right: 6px !important;
+  box-sizing: border-box !important;
+}
+
+.monaco-workbench .part.sidebar .pane-header > .title,
+.monaco-workbench .part.auxiliarybar .pane-header > .title {
+  margin-left: 10px !important;
+  min-width: 0 !important;
+}
+
+.monaco-workbench .part.sidebar .pane-header > .actions,
+.monaco-workbench .part.sidebar .pane-header > .actions-container,
+.monaco-workbench .part.sidebar .pane-header > .action-bar,
+.monaco-workbench .part.auxiliarybar .pane-header > .actions,
+.monaco-workbench .part.auxiliarybar .pane-header > .actions-container,
+.monaco-workbench .part.auxiliarybar .pane-header > .action-bar {
+  margin-right: 10px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ---------------------------------------------------------------------------
+   3. Tabs — flat-top pills that visually merge into the editor
+   ------------------------------------------------------------------------- */
+.monaco-workbench .editor-group-container > .title .tabs-container > .tab {
+  border-radius: var(--void-r-item) var(--void-r-item) 0 0 !important;
+  margin: 4px 2px 0 2px !important;
+  border: 0 !important;
+  position: relative !important;
+}
+
+/* Active tab: 2px tinted indicator across the top, no harsh edges. */
+.monaco-workbench .editor-group-container > .title .tabs-container > .tab.active::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important; left: 6px !important; right: 6px !important;
+  height: 2px !important;
+  background: var(--void-tint) !important;
+  border-radius: var(--void-r-pill) !important;
+  box-shadow: 0 0 8px color-mix(in oklab, var(--void-tint) 50%, transparent) !important;
+}
+
+/* Active tab text picks up a subtle tint, never full saturation. */
+.monaco-workbench .editor-group-container > .title .tabs-container > .tab.active .tab-label {
+  color: color-mix(in oklab, var(--void-tint) 35%, var(--void-text)) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   4. Sidebar list rows — rounded inset highlights
+   IMPORTANT: scope to .part.sidebar only. Applying these rules globally
+   to `.monaco-workbench .monaco-list .monaco-list-row` poisoned every
+   virtualised list (suggest widget, terminal split picker, etc.) and
+   fed wrong height/width measurements back to VS Code's row positioner,
+   which then thought the explorer pane only had room for ~5 rows.
+   Also: never override `height`, `line-height`, or vertical padding on
+   the row — those desync the JS-computed `top` from rendered height.
+   ------------------------------------------------------------------------- */
+/* DO NOT add `position: relative !important` here — VS Code's virtualiser
+   sets `position: absolute` inline on each row, and `!important` overrides
+   inline styles, throwing rows into block flow. The result is that the
+   JS-set `top` offset stacks on top of the flow position and rows render
+   at exactly 2× their intended spacing. The ::after marker below works
+   fine relative to the row's existing absolute positioning. */
+.monaco-workbench .part.sidebar .monaco-list-row {
+  border-radius: var(--void-r-item) !important;
+}
+
+/* Active-file marker — 2px tinted bar on the left of the active row. */
+.monaco-workbench .part.sidebar .monaco-list-row.selected.focused::after,
+.monaco-workbench .part.sidebar .monaco-list-row.selected::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important; top: 4px !important; bottom: 4px !important;
+  width: 2px !important;
+  border-radius: var(--void-r-pill) !important;
+  background: var(--void-tint) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   5. Command palette / quick input — centered floating widget
+   ------------------------------------------------------------------------- */
+.quick-input-widget {
+  border-radius: var(--void-r-widget) !important;
+  background: var(--void-surface-2) !important;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6),
+              0 0 0 1px var(--void-line) !important;
+  backdrop-filter: blur(12px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  overflow: hidden !important;
+  margin-top: 8px !important;
+}
+
+.quick-input-widget .quick-input-box .monaco-inputbox {
+  border-radius: var(--void-r-input) !important;
+  background: var(--void-surface-1) !important;
+}
+
+.quick-input-widget .monaco-list .monaco-list-row {
+  border-radius: var(--void-r-item) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   6. Editor widgets — suggest, hover, find, peek
+   ------------------------------------------------------------------------- */
+.monaco-editor .suggest-widget,
+.monaco-editor .monaco-hover,
+.monaco-editor .parameter-hints-widget,
+.monaco-editor .rename-box,
+.monaco-editor .monaco-menu-container,
+.monaco-editor .find-widget {
+  border-radius: var(--void-r-widget) !important;
+  background: var(--void-surface-2) !important;
+  border: 0 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5),
+              0 0 0 1px var(--void-line) !important;
+  overflow: hidden !important;
+}
+
+.monaco-editor .find-widget {
+  margin-top: 6px !important;
+  margin-right: 6px !important;
+}
+
+.monaco-editor .find-widget .monaco-inputbox {
+  border-radius: var(--void-r-input) !important;
+}
+
+.monaco-editor .find-widget.visible:focus-within {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5),
+              0 0 0 1px color-mix(in oklab, var(--void-tint) 40%, transparent) !important;
+}
+
+.monaco-editor .suggest-widget .monaco-list .monaco-list-row {
+  border-radius: var(--void-r-item) !important;
+  margin: 0 4px !important;
+}
+
+/* Workbench-wide hover popovers — terminal tab tooltips, status-bar
+   tooltips, panel hovers. These live OUTSIDE .monaco-editor so the rule
+   above doesn't catch them; without an explicit opaque background they
+   fall back to a default that lets editor content bleed through. */
+.monaco-workbench .monaco-hover {
+  background: var(--void-surface-2) !important;
+  border-radius: var(--void-r-item) !important;
+  border: 0 !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.10),
+    0 8px 24px rgba(0, 0, 0, 0.6) !important;
+  overflow: hidden !important;
+}
+.monaco-workbench .monaco-hover .hover-contents,
+.monaco-workbench .monaco-hover .markdown-hover {
+  background: transparent !important;
+}
+
+/* ---------------------------------------------------------------------------
+   7. Notifications
+   ------------------------------------------------------------------------- */
+.notifications-toasts .notification-toast,
+.notifications-center .notifications-list-container {
+  border-radius: var(--void-r-widget) !important;
+  background: var(--void-surface-2) !important;
+  border: 0 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55) !important;
+  overflow: hidden !important;
+}
+
+.notifications-toasts {
+  padding-right: 12px !important;
+  padding-bottom: 12px !important;
+}
+
+/* ---------------------------------------------------------------------------
+   8. Buttons & inputs (incl. Settings UI)
+   ------------------------------------------------------------------------- */
+.monaco-workbench .monaco-button,
+.monaco-workbench .action-bar .action-item .action-label.codicon[role="button"] {
+  border-radius: var(--void-r-input) !important;
+}
+
+.monaco-workbench .monaco-inputbox,
+.monaco-workbench .settings-text-input,
+.monaco-workbench .monaco-select-box {
+  border-radius: var(--void-r-input) !important;
+}
+
+.monaco-workbench .monaco-inputbox.synthetic-focus,
+.monaco-workbench .monaco-inputbox:focus-within {
+  outline: 0 !important;
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--void-tint) 50%, transparent) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   9. Status bar — language chip picks up the tint
+   ------------------------------------------------------------------------- */
+.monaco-workbench .part.statusbar {
+  background: var(--void-canvas) !important;
+}
+
+/* The language-mode item has a stable id (#status.editor.mode); the dot
+   must be escaped in the attribute selector. Locale-independent. */
+.monaco-workbench .part.statusbar #status\.editor\.mode {
+  background: color-mix(in oklab, var(--void-tint) 18%, transparent) !important;
+  border-radius: var(--void-r-pill) !important;
+  margin: 4px 4px !important;
+  padding: 0 8px !important;
+}
+
+.monaco-workbench .part.statusbar #status\.editor\.mode .label {
+  color: color-mix(in oklab, var(--void-tint) 80%, var(--void-text)) !important;
+}
+
+/* ---------------------------------------------------------------------------
+  10. Scrollbars — minimal pills
+   ------------------------------------------------------------------------- */
+.monaco-scrollable-element > .scrollbar > .slider {
+  border-radius: var(--void-r-pill) !important;
+  background: color-mix(in oklab, var(--void-surface-3) 80%, transparent) !important;
+}
+
+.monaco-scrollable-element > .scrollbar > .slider:hover {
+  background: var(--void-surface-3) !important;
+}
+
+.monaco-scrollable-element > .scrollbar > .slider.active {
+  background: color-mix(in oklab, var(--void-tint) 50%, var(--void-surface-3)) !important;
+}
+
+/* ---------------------------------------------------------------------------
+  11. Activity bar — icon hover/active glow uses tint
+   ------------------------------------------------------------------------- */
+.monaco-workbench .part.activitybar .action-item {
+  border-radius: var(--void-r-item) !important;
+  margin: 2px 6px !important;
+}
+
+.monaco-workbench .part.activitybar .action-item .action-label {
+  border-radius: var(--void-r-item) !important;
+  transition: filter 200ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.monaco-workbench .part.activitybar .action-item:hover .action-label {
+  filter: drop-shadow(0 0 4px color-mix(in oklab, var(--void-tint) 35%, transparent)) !important;
+}
+
+.monaco-workbench .part.activitybar .action-item.checked .action-label {
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--void-tint) 45%, transparent)) !important;
+}
+
+/* The default vertical accent stripe is replaced by a tinted dot. */
+.monaco-workbench .part.activitybar .action-item.checked .active-item-indicator::before {
+  background: var(--void-tint) !important;
+  border-radius: var(--void-r-pill) !important;
+}
+
+/* ---------------------------------------------------------------------------
+  12. Terminal panel
+   ------------------------------------------------------------------------- */
+.monaco-workbench .part.panel .terminal-outer-container,
+.monaco-workbench .part.panel .terminal-wrapper {
+  border-radius: var(--void-r-panel) !important;
+  overflow: hidden !important;
+}
+
+/* ---------------------------------------------------------------------------
+  13. Reduced motion
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .monaco-workbench *,
+  .monaco-workbench *::before,
+  .monaco-workbench *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

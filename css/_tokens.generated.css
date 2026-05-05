@@ -1,0 +1,69 @@
+/* AUTO-GENERATED from tokens.json — do not edit by hand. */
+.monaco-workbench {
+  --void-canvas:    #000000;
+  --void-surface-0: #060608;
+  --void-surface-1: #0E0E12;
+  --void-surface-2: #16161C;
+  --void-surface-3: #20202A;
+  --void-line:      #1A1A22;
+  --void-text:      #E6E6EB;
+  --void-text-muted:#8A8A95;
+  --void-text-faint:#525260;
+  --void-accent:    #7C7CFF;
+  --void-success:   #4ADE80;
+  --void-warn:      #F59E0B;
+  --void-error:     #F87171;
+  --void-info:      #60A5FA;
+
+  --void-r-panel:  16px;
+  --void-r-widget: 12px;
+  --void-r-input:  10px;
+  --void-r-item:   6px;
+  --void-r-pill:   999px;
+
+  --void-gap-outer: 8px;
+  --void-gap-top:   8px;
+
+  --void-tint: #7C7CFF;
+}
+
+.monaco-workbench[data-active-lang="typescript"] { --void-tint: #3B82F6; }
+.monaco-workbench[data-active-lang="typescriptreact"] { --void-tint: #3B82F6; }
+.monaco-workbench[data-active-lang="javascript"] { --void-tint: #EAB308; }
+.monaco-workbench[data-active-lang="javascriptreact"] { --void-tint: #EAB308; }
+.monaco-workbench[data-active-lang="python"] { --void-tint: #FBBF24; }
+.monaco-workbench[data-active-lang="rust"] { --void-tint: #F97316; }
+.monaco-workbench[data-active-lang="go"] { --void-tint: #06B6D4; }
+.monaco-workbench[data-active-lang="ruby"] { --void-tint: #EF4444; }
+.monaco-workbench[data-active-lang="markdown"] { --void-tint: #A78BFA; }
+.monaco-workbench[data-active-lang="json"] { --void-tint: #94A3B8; }
+.monaco-workbench[data-active-lang="jsonc"] { --void-tint: #94A3B8; }
+.monaco-workbench[data-active-lang="yaml"] { --void-tint: #94A3B8; }
+.monaco-workbench[data-active-lang="toml"] { --void-tint: #94A3B8; }
+.monaco-workbench[data-active-lang="shellscript"] { --void-tint: #22C55E; }
+.monaco-workbench[data-active-lang="bash"] { --void-tint: #22C55E; }
+.monaco-workbench[data-active-lang="zsh"] { --void-tint: #22C55E; }
+.monaco-workbench[data-active-lang="css"] { --void-tint: #EC4899; }
+.monaco-workbench[data-active-lang="scss"] { --void-tint: #EC4899; }
+.monaco-workbench[data-active-lang="less"] { --void-tint: #EC4899; }
+.monaco-workbench[data-active-lang="html"] { --void-tint: #F87171; }
+.monaco-workbench[data-active-lang="vue"] { --void-tint: #10B981; }
+.monaco-workbench[data-active-lang="svelte"] { --void-tint: #F43F5E; }
+.monaco-workbench[data-active-lang="java"] { --void-tint: #DC2626; }
+.monaco-workbench[data-active-lang="kotlin"] { --void-tint: #DC2626; }
+.monaco-workbench[data-active-lang="scala"] { --void-tint: #DC2626; }
+.monaco-workbench[data-active-lang="cpp"] { --void-tint: #8B5CF6; }
+.monaco-workbench[data-active-lang="c"] { --void-tint: #8B5CF6; }
+.monaco-workbench[data-active-lang="csharp"] { --void-tint: #8B5CF6; }
+.monaco-workbench[data-active-lang="objective-c"] { --void-tint: #8B5CF6; }
+.monaco-workbench[data-active-lang="sql"] { --void-tint: #0EA5E9; }
+.monaco-workbench[data-active-lang="php"] { --void-tint: #6366F1; }
+.monaco-workbench[data-active-lang="swift"] { --void-tint: #FB923C; }
+.monaco-workbench[data-active-lang="dart"] { --void-tint: #0891B2; }
+.monaco-workbench[data-active-lang="lua"] { --void-tint: #3B82F6; }
+.monaco-workbench[data-active-lang="haskell"] { --void-tint: #A855F7; }
+.monaco-workbench[data-active-lang="elixir"] { --void-tint: #A855F7; }
+.monaco-workbench[data-active-lang="clojure"] { --void-tint: #22D3EE; }
+.monaco-workbench[data-active-lang="dockerfile"] { --void-tint: #0EA5E9; }
+.monaco-workbench[data-active-lang="terraform"] { --void-tint: #7C3AED; }
+.monaco-workbench[data-active-lang="hcl"] { --void-tint: #7C3AED; }
