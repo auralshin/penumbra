@@ -1,0 +1,49 @@
+name: Bug report
+description: Report a rendering, color, packaging, or install problem.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the issue and what you expected to see.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Open ...
+        2. Run ...
+        3. See ...
+    validations:
+      required: true
+
+  - type: input
+    id: vscode-version
+    attributes:
+      label: VS Code version
+      placeholder: "1.100.0"
+    validations:
+      required: true
+
+  - type: input
+    id: custom-ui-style-version
+    attributes:
+      label: Custom UI Style version
+      placeholder: "subframe7536.custom-ui-style version, if used"
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Attach screenshots for visual issues.
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context

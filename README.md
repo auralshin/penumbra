@@ -2,6 +2,13 @@
 
 Penumbra is a pitch-black VS Code color theme with optional Custom UI Style chrome for rounded floating workbench surfaces and per-language accent tints.
 
+## Screenshots
+
+Production screenshots should live in `assets/screenshots/`:
+
+- `workbench.png` - full workbench with sidebar, editor, panel/chat, and status bar
+- `syntax.png` - editor-focused syntax sample
+
 ## Features
 
 - OLED-friendly dark color theme

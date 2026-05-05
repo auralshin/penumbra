@@ -37,6 +37,7 @@
     "css/penumbra.css",
     "css/penumbra.js",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "contributes": {
