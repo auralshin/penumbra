@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Packaged extension artifacts
+*.vsix
+
+# VS Code test and local development state
+.vscode-test/
+.penumbra-dev/
+.claude/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
